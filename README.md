@@ -121,6 +121,10 @@ This script will:
 
 ## 📄 Technical Report
 
+Checkout the github-page
+
+Or
+
 Render the full Quarto technical report:
 
 ```bash
