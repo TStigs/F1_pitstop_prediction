@@ -91,6 +91,7 @@ window.Quarto = {
   <li><a href="#model-interpretation-shap-analysis" id="toc-model-interpretation-shap-analysis" class="nav-link" data-scroll-target="#model-interpretation-shap-analysis">6. Model Interpretation (SHAP Analysis)</a>
   <ul class="collapse">
   <li><a href="#interpretation-limitations" id="toc-interpretation-limitations" class="nav-link" data-scroll-target="#interpretation-limitations">Interpretation limitations</a></li>
+  <li><a href="#causal-analysis-considerations" id="toc-causal-analysis-considerations" class="nav-link" data-scroll-target="#causal-analysis-considerations">Causal Analysis Considerations</a></li>
   </ul></li>
   <li><a href="#conclusion-reproducibility" id="toc-conclusion-reproducibility" class="nav-link" data-scroll-target="#conclusion-reproducibility">7. Conclusion &amp; Reproducibility</a></li>
   </ul>
@@ -293,6 +294,17 @@ window.Quarto = {
 <section id="interpretation-limitations" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-limitations">Interpretation limitations</h3>
 <p>These SHAP values explain a LightGBM model trained on the full training dataset and evaluated on a reproducible 2,000-row training sample. They do not directly explain the weighted ensemble or the best-performing XGBoost model. Because many engineered variables are correlated—for example <code>LapNumber</code>, <code>RaceProgress</code>, <code>RaceRemaining</code>, and estimated laps—SHAP credit can be divided or shifted among related features. The results describe model behavior and associations in this dataset; they do not establish causal F1 strategy effects.</p>
+<hr>
+</section>
+<section id="causal-analysis-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="causal-analysis-considerations">Causal Analysis Considerations</h3>
+<p>Although logistic regression coefficients can help explain relationships between race conditions and pit-stop predictions, they should not be interpreted as causal effects in this project. The model is designed to predict whether a driver will pit on the next lap, not to determine whether changing a particular feature would cause a pit stop. Because the logistic-regression pipeline standardizes its inputs, each coefficient represents the change in the log-odds of a pit stop associated with a one-standard-deviation increase in that feature, holding the other included variables constant. Exponentiating a coefficient produces an odds ratio. For example, an odds ratio of 1.50 would indicate 50% higher estimated odds of pitting, but not a 50-percentage-point increase in probability.</p>
+<p>Several characteristics of the data prevent these associations from being interpreted causally. Tire life, stint number, lap number, race progress, and cumulative degradation are closely related since tires degrade increasingly (tyres always wear, regardless of raceble condistions, over 1 lap). Consequently, coefficient signs and magnitudes may change when related variables are added or removed. This means that these variables may actually just functions of each other, rather than direct causal mechanisms.</p>
+<p>The dataset also contains repeated observations from the same drivers and races. These observations are not statistically independent, and a tire can only reach an advanced age if the team previously chose to remain on track. This creates a selection effect among high-tire-age observations.</p>
+<p>A defensible causal study would therefore require a more specific question, such as:</p>
+<p>What is the effect of pitting now, compared with remaining on track, on a driver’s position or lap-time performance over the following five laps?</p>
+<p>Such an analysis would define the pit decision as the treatment and a subsequent race result as the outcome. It would then identify pre-treatment confounders, exclude post-treatment variables, account for repeated race observations, and potentially apply propensity-score weighting, matching, or longitudinal causal methods.</p>
+<p>Accordingly, the current logistic-regression coefficients are best described as adjusted predictive associations. They provide insight into the patterns used by the model, but they do not establish that changing a feature would cause a team to alter its pit strategy.</p>
 <hr>
 </section>
 </section>
