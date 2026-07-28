@@ -149,6 +149,21 @@ associations in this dataset; they do not establish causal F1 strategy effects.
 
 ---
 
+### Causal Analysis Considerations
+
+Although logistic regression coefficients can help explain relationships between race conditions and pit-stop predictions, they should not be interpreted as causal effects in this project. The model is designed to predict whether a driver will pit on the next lap, not to determine whether changing a particular feature would cause a pit stop.
+Because the logistic-regression pipeline standardizes its inputs, each coefficient represents the change in the log-odds of a pit stop associated with a one-standard-deviation increase in that feature, holding the other included variables constant. Exponentiating a coefficient produces an odds ratio. For example, an odds ratio of 1.50 would indicate 50% higher estimated odds of pitting, but not a 50-percentage-point increase in probability.
+
+Several characteristics of the data prevent these associations from being interpreted causally. Tire life, stint number, lap number, race progress, and cumulative degradation are closely related since tires degrade increasingly (tyres always wear, regardless of raceble condistions, over 1 lap). Consequently, coefficient signs and magnitudes may change when related variables are added or removed. This means that these variables may actually just functions of each other, rather than direct causal mechanisms.
+
+The dataset also contains repeated observations from the same drivers and races. These observations are not statistically independent, and a tire can only reach an advanced age if the team previously chose to remain on track. This creates a selection effect among high-tire-age observations.
+A defensible causal study would therefore require a more specific question, such as:
+What is the effect of pitting now, compared with remaining on track, on a driver’s position or lap-time performance over the following five laps?
+
+Such an analysis would define the pit decision as the treatment and a subsequent race result as the outcome. It would then identify pre-treatment confounders, exclude post-treatment variables, account for repeated race observations, and potentially apply propensity-score weighting, matching, or longitudinal causal methods.
+Accordingly, the current logistic-regression coefficients are best described as adjusted predictive associations. They provide insight into the patterns used by the model, but they do not establish that changing a feature would cause a team to alter its pit strategy.
+
+---
 
 ## 7. Conclusion & Reproducibility
 
