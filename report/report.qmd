@@ -149,15 +149,8 @@ associations in this dataset; they do not establish causal F1 strategy effects.
 
 ---
 
-## 7. Kaggle Submission Verification
 
-The final test predictions were generated using our weighted probability ensemble across the 188,165 test rows:
-- **Output File**: `submissions/submission.csv`
-- **Verification**: Exactly 188,165 rows, columns `['id', 'PitNextLap']`, 0 missing or NaN values.
-
----
-
-## 8. Conclusion & Reproducibility
+## 7. Conclusion & Reproducibility
 
 This project demonstrates a reproducible portfolio-scale data science workflow
 combining modular Python modules (`src/data.py`, `src/features.py`,
