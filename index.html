@@ -92,8 +92,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#interpretation-limitations" id="toc-interpretation-limitations" class="nav-link" data-scroll-target="#interpretation-limitations">Interpretation limitations</a></li>
   </ul></li>
-  <li><a href="#kaggle-submission-verification" id="toc-kaggle-submission-verification" class="nav-link" data-scroll-target="#kaggle-submission-verification">7. Kaggle Submission Verification</a></li>
-  <li><a href="#conclusion-reproducibility" id="toc-conclusion-reproducibility" class="nav-link" data-scroll-target="#conclusion-reproducibility">8. Conclusion &amp; Reproducibility</a></li>
+  <li><a href="#conclusion-reproducibility" id="toc-conclusion-reproducibility" class="nav-link" data-scroll-target="#conclusion-reproducibility">7. Conclusion &amp; Reproducibility</a></li>
   </ul>
 </nav>
 </div>
@@ -297,13 +296,8 @@ window.Quarto = {
 <hr>
 </section>
 </section>
-<section id="kaggle-submission-verification" class="level2">
-<h2 class="anchored" data-anchor-id="kaggle-submission-verification">7. Kaggle Submission Verification</h2>
-<p>The final test predictions were generated using our weighted probability ensemble across the 188,165 test rows: - <strong>Output File</strong>: <code>submissions/submission.csv</code> - <strong>Verification</strong>: Exactly 188,165 rows, columns <code>['id', 'PitNextLap']</code>, 0 missing or NaN values.</p>
-<hr>
-</section>
 <section id="conclusion-reproducibility" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion-reproducibility">8. Conclusion &amp; Reproducibility</h2>
+<h2 class="anchored" data-anchor-id="conclusion-reproducibility">7. Conclusion &amp; Reproducibility</h2>
 <p>This project demonstrates a reproducible portfolio-scale data science workflow combining modular Python modules (<code>src/data.py</code>, <code>src/features.py</code>, <code>src/validation.py</code>, <code>src/models.py</code>, <code>src/train.py</code>), race-grouped cross-validation, multi-model GBDT ensembling, and SHAP-based model interpretation. The repository includes the generated submission and static report figures; the interpretation notebook contains the analysis code but does not currently store executed outputs or export the SHAP figure itself.</p>
 </section>
 
