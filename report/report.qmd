@@ -1,7 +1,7 @@
 ---
 title: "F1 Pit Stop Prediction: Machine Learning Workflow & Strategy Analysis"
 subtitle: "Kaggle Playground Series S6E5 Portfolio Project"
-author: "F1 Data Science Team"
+author: "Tyler Stigall"
 date: "2026-07-28"
 format:
   html:
